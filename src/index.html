@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeopardy Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Jeopardy!</h1>
+        <div class="score-display">
+          <span>Score: $<span id="scoreValue">0</span></span>
+        </div>
+        <div class="controls">
+          <button id="newGameBtn">New Game</button>
+          <button id="resetBtn">Reset Board</button>
+        </div>
+      </header>
+
+      <div id="gameBoard" class="game-board"></div>
+
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="category-name"></span>
+            <span class="point-value"></span>
+            <button class="close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div id="questionView" class="view">
+              <p class="question-text"></p>
+              <button class="show-answer-btn">Show Answer</button>
+            </div>
+            <div id="answerView" class="view hidden">
+              <p class="answer-text"></p>
+              <div class="answer-actions">
+                <button class="correct-btn">Correct</button>
+                <button class="incorrect-btn">Incorrect</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>

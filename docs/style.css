@@ -37,6 +37,28 @@ header {
   min-width: 150px;
 }
 
+.category-count {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9em;
+  color: #ffd700;
+}
+
+.category-count label {
+  font-weight: bold;
+}
+
+.category-count select {
+  padding: 6px 8px;
+  font-size: 0.9em;
+  background: #060ce9;
+  color: #ffd700;
+  border: 2px solid #ffd700;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 header h1 {
   font-size: 3em;
   margin-bottom: 20px;
@@ -214,18 +236,46 @@ header h1 {
 .category-header {
   background: #060ce9;
   color: #ffd700;
-  padding: 20px 10px;
-  text-align: center;
+  padding: 10px 10px 10px 10px;
   font-size: 1.2em;
   font-weight: bold;
   border: 2px solid #fff;
   border-radius: 5px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   min-height: 80px;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.category-title {
+  flex: 1;
+  text-align: center;
+  padding: 10px 5px;
+}
+
+.swap-category-btn {
+  background: transparent;
+  border: 2px solid #ffd700;
+  color: #ffd700;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  cursor: pointer;
+  margin-left: 8px;
+  flex-shrink: 0;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+
+.swap-category-btn:hover {
+  background: #ffd700;
+  color: #060ce9;
+  transform: scale(1.05);
 }
 
 .cell {

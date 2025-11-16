@@ -405,6 +405,20 @@ The dishwasher rack where you're supposed to put glasses = What is the top rack?
 What rinse aid does in a dishwasher = What is prevent water spots?
 
 The cleaning product you should never mix with bleach = What is ammonia?
+
+[The Roman Empire]
+
+The Roman engineering innovation using arches to transport water = What are aqueducts?
+Julius Caesar's famous last words according to Shakespeare = What is 'Et tu, Brute'?
+The volcanic eruption that buried Pompeii in 79 CE = What is Mount Vesuvius?
+The first Roman Emperor after the Republic ended = Who is Augustus (or Octavian)?
+Caesar's rival who he defeated in civil war = Who is Pompey?
+The Roman practice of decimating a unit meant killing this fraction = What is one-tenth?
+The brothers who according to legend founded Rome = Who are Romulus and Remus?
+The animal that supposedly nursed Romulus and Remus = What is a wolf (or she-wolf)?
+The Carthaginian general who crossed the Alps with elephants = Who is Hannibal?
+The series of wars between Rome and Carthage = What are the Punic Wars?
+The Eastern Roman Empire that lasted until 1453 = What is the Byzantine Empire?
 `;
 
 // Point values for questions (standard Jeopardy format)
@@ -463,6 +477,16 @@ function parseCategoriesText(text) {
 // Parse all categories
 const ALL_CATEGORIES = parseCategoriesText(boardsText);
 
+// How many categories to use when generating a board
+let CATEGORY_COUNT = 5;
+
+function setCategoryCount(count) {
+  const n = parseInt(count, 10);
+  if (!isNaN(n) && n > 0) {
+    CATEGORY_COUNT = Math.min(n, ALL_CATEGORIES.length);
+  }
+}
+
 // Cache for random board selections (keyed by board name/session)
 const RANDOM_BOARD_CACHE = {};
 
@@ -476,15 +500,15 @@ function shuffleArray(array) {
   return shuffled;
 }
 
-// Pick 5 random categories
-function getRandomCategories(count = 5) {
+// Pick random categories
+function getRandomCategories(count = CATEGORY_COUNT) {
   const shuffled = shuffleArray(ALL_CATEGORIES);
   return shuffled.slice(0, Math.min(count, shuffled.length));
 }
 
 // Generate a new random board
 function generateRandomBoard() {
-  const randomCategories = getRandomCategories(5);
+  const randomCategories = getRandomCategories(CATEGORY_COUNT);
   return {
     name: "Random",
     categories: randomCategories,

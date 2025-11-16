@@ -198,10 +198,26 @@ function renderBoard() {
   board.style.gridTemplateRows = `auto repeat(${numRows - 1}, 1fr)`;
 
   // Create category headers
-  categories.forEach((category) => {
+  categories.forEach((category, colIndex) => {
     const header = document.createElement("div");
     header.className = "category-header";
-    header.textContent = category.category;
+
+    const title = document.createElement("span");
+    title.className = "category-title";
+    title.textContent = category.category;
+    header.appendChild(title);
+
+    const swapBtn = document.createElement("button");
+    swapBtn.className = "swap-category-btn";
+    swapBtn.type = "button";
+    swapBtn.title = "Swap this category";
+    swapBtn.textContent = "↻";
+    swapBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      swapCategory(colIndex);
+    });
+    header.appendChild(swapBtn);
+
     board.appendChild(header);
   });
 
@@ -489,6 +505,28 @@ function setupEventListeners() {
     });
 
     // Close help modal with Escape key (handled in existing keydown handler)
+  }
+
+  // Setup category count selector
+  const categoryCountSelect = document.getElementById("categoryCountSelect");
+  if (categoryCountSelect) {
+    categoryCountSelect.addEventListener("change", (e) => {
+      const value = e.target.value;
+      setCategoryCount(value);
+
+      // Reshuffle categories when the count changes
+      const newBoard = reshuffleCategories();
+      gameState.currentBoard = newBoard.name;
+
+      gameState.answeredQuestions = {};
+      gameState.currentQuestion = null;
+      gameState.currentBuzzer = null;
+      gameState.buzzerLocked = false;
+
+      saveGameState();
+      hideModal();
+      renderBoard();
+    });
   }
 
   // Setup players button

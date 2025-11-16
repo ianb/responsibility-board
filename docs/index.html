@@ -3,21 +3,90 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jeopardy Game</title>
+    <title>Responsibility Board!</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>Jeopardy!</h1>
-        <div class="score-display">
-          <span>Score: $<span id="scoreValue">0</span></span>
+        <div class="header-main">
+          <h1>Responsibility Board!</h1>
+          <div class="players-section">
+            <div class="players-container" id="playersContainer"></div>
+          </div>
         </div>
-        <div class="controls">
-          <button id="newGameBtn">New Game</button>
-          <button id="resetBtn">Reset Board</button>
+        <div class="header-sidebar">
+          <button id="helpBtn" class="help-btn">?</button>
+          <button id="setupPlayersBtn" class="setup-btn">Setup Players</button>
+          <button id="newGameBtn" class="control-btn">New Game</button>
+          <button id="resetBtn" class="control-btn">Reset Board</button>
         </div>
       </header>
+
+      <div id="helpModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span>How to Play</span>
+            <button class="close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="help-content">
+              <h2>Responsibility Board!</h2>
+              <p>
+                A Jeopardy-style game to learn about adult responsibilities.
+              </p>
+
+              <h3>Gameplay</h3>
+              <ol>
+                <li>Click on any question cell to reveal the clue</li>
+                <li>Players buzz in by pressing their number key (1-5)</li>
+                <li>First player to buzz in can answer</li>
+                <li>Click "Show Answer" to reveal the correct answer</li>
+                <li>
+                  Judge the response: Correct (adds points), Incorrect
+                  (subtracts points), or Pass (no change)
+                </li>
+              </ol>
+
+              <h3>Controls</h3>
+              <ul>
+                <li>
+                  <strong>Setup Players</strong>: Configure player names and
+                  number of players
+                </li>
+                <li>
+                  <strong>New Game</strong>: Start fresh with new random
+                  categories and reset scores
+                </li>
+                <li>
+                  <strong>Reset Board</strong>: Reshuffle categories and make
+                  all questions available again
+                </li>
+              </ul>
+
+              <h3>Keyboard Shortcuts</h3>
+              <ul>
+                <li><strong>1-5</strong>: Buzz in as Player 1-5</li>
+                <li>
+                  <strong>Space</strong>: Show answer (when question is
+                  displayed)
+                </li>
+                <li><strong>Enter</strong>: Mark answer as correct</li>
+                <li><strong>Backspace</strong>: Mark answer as incorrect</li>
+                <li><strong>Escape</strong>: Close modal</li>
+              </ul>
+
+              <h3>Scoring</h3>
+              <ul>
+                <li>Questions are worth $200, $400, $600, $800, or $1000</li>
+                <li>Correct answer: Add points to your score</li>
+                <li>Incorrect answer: Subtract points from your score</li>
+                <li>Pass: No points awarded</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div id="gameBoard" class="game-board"></div>
 
@@ -29,15 +98,30 @@
             <button class="close-btn">&times;</button>
           </div>
           <div class="modal-body">
-            <div id="questionView" class="view">
+            <div id="buzzerView" class="view">
+              <div class="buzzer-status">
+                <p class="question-text"></p>
+                <div class="buzzer-display" id="buzzerDisplay">
+                  <p>Press keys 1-5 to buzz in</p>
+                </div>
+                <div class="buzzer-actions">
+                  <button class="show-answer-btn">Show Answer</button>
+                </div>
+              </div>
+            </div>
+            <div id="questionView" class="view hidden">
               <p class="question-text"></p>
               <button class="show-answer-btn">Show Answer</button>
             </div>
             <div id="answerView" class="view hidden">
               <p class="answer-text"></p>
+              <div class="current-player" id="currentPlayer"></div>
               <div class="answer-actions">
-                <button class="correct-btn">Correct</button>
-                <button class="incorrect-btn">Incorrect</button>
+                <div class="judge-buttons">
+                  <button class="correct-btn">Correct</button>
+                  <button class="incorrect-btn">Incorrect</button>
+                </div>
+                <button class="pass-btn">Pass</button>
               </div>
             </div>
           </div>
